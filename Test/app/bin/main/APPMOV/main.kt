@@ -64,6 +64,37 @@ object DebateManager {
             }
         }
     }
+
+    //ACTUALIZAR DEBATE
+
+    fun actualizarDebate(debates: MutableList<Debate>) {
+        println("=== Actualizar Debate ===")
+        print("ID del debate a actualizar: ")
+        val id = readLine()?.toIntOrNull()
+    
+        val debate = debates.find { it.id == id }
+    
+        if (debate == null) {
+            println("No se encontró un debate con el ID proporcionado.")
+            return
+        }
+
+        println("Debate actual:")
+        println(debate) 
+        //Crear nuevo debate
+        val debateActualizado = crearDebate()
+        debates.add(debateActualizado)
+        debates.remove(debate)
+        eliminarDebate(id!!)
+        cargarDebates()
+        guardarDebates()
+        agregarDebate(debateActualizado)
+        println("El debate ha sido actualizado correctamente.")
+    }
+    
+
+
+
 }
 
 object ParticipanteManager {
@@ -129,7 +160,8 @@ fun main() {
         println("4. Ver participantes de un debate")
         println("5. Eliminar debate")
         println("6. Eliminar participante")
-        println("7. Salir")
+        println("7. Actualizar Debate")
+        println("8. Salir")
         print("Ingrese una opción: ")
         val opcion = readLine()?.toIntOrNull()
 
@@ -181,6 +213,12 @@ fun main() {
                 }
             }
             7 -> {
+
+                val debates = DebateManager.obtenerDebates()
+                DebateManager.actualizarDebate(debates.toMutableList())
+            }
+            
+            8 -> {
                 continuar = false
                 println("Saliendo del programa...")
             }
