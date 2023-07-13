@@ -10,6 +10,8 @@ import android.util.Log
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 
+/*cambio correo  */
+
 class MainActivity : AppCompatActivity() {
 
     val callbackContenidoIntentExplicito =
